@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Album List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Album List</h1>
+<div class="container">
+    <table class ="container" border="1">
+        <tr>
+            <th><h1>Title</h1></th>
+            <th><h1>Author</h1></th>
+        </tr>
+        <tr th:each ="album : ${albums}">
+            <td th:utext="${album.title}">...</td>
+            <td th:utext="${album.author}">...</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
