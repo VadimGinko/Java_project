@@ -14,8 +14,7 @@
             <th><h1>Author</h1></th>
         </tr>
         <tr th:each ="album : ${albums}">
-            <td th:utext="${album.title}">...</td>
-            <td th:utext="${album.author}">...</td>
+            <td th:utext="${album.subject}">...</td>
         </tr>
     </table>
 </div>

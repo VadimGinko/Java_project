@@ -1,37 +1,90 @@
 package com.example.students.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
 public class Student {
+    public Student(){
+    }
+
+    public Student(Integer studentId, String studentName, String studentSurname, String studentMiddleName, Faculty facultyName, String course, int group) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.studentSurname = studentSurname;
+        this.studentMiddleName = studentMiddleName;
+        this.facultyName = facultyName;
+        this.course = course;
+        this.groupOfStudent = group;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
-    private String title;
-    private String author;
+    private Integer studentId;
+    private String studentName;
+    private String studentSurname;
+    private String studentMiddleName;
+    @OneToOne
+    private Faculty facultyName;
+    private String course;
+    private int groupOfStudent;
 
-    public Integer getId() {
-        return id;
+    public void setGroup(int group) {
+        this.groupOfStudent = group;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getGroup() {
+        return groupOfStudent;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
+
+    public String getStudentSurname() {
+        return studentSurname;
+    }
+
+    public void setStudentSurname(String studentSurname) {
+        this.studentSurname = studentSurname;
+    }
+
+    public String getStudentMiddleName() {
+        return studentMiddleName;
+    }
+
+    public void setStudentMiddleName(String studentMiddleName) {
+        this.studentMiddleName = studentMiddleName;
+    }
+
+    public Faculty getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(Faculty facultyName) {
+        this.facultyName = facultyName;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+
 }
-
