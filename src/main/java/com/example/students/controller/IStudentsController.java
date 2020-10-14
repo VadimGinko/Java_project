@@ -17,8 +17,8 @@ import java.util.List;
 
 @Slf4j
 @Controller
-public class StudentsController {
-    public StudentsController(com.example.students.services.SubjectService subjectService) {
+public class IStudentsController {
+    public IStudentsController(com.example.students.services.SubjectService subjectService) {
         SubjectService = subjectService;
     }
 
@@ -50,7 +50,7 @@ public class StudentsController {
     public ModelAndView personList(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("albumlist");
-        List<Subject> albums = SubjectService.findAll();
+        List<Subject> albums = SubjectService.findBySubjectName("dq");
         model.addAttribute("albums", albums);
         log.info("/allalbums was called(GET)");
         return modelAndView;

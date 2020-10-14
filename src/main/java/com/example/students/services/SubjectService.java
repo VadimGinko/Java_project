@@ -20,4 +20,9 @@ public class SubjectService implements ISubjectService {
     public List<Subject> findAll() {
         return this.subjectRepository.findAll();
     }
+
+    @Override
+    public List<Subject> findBySubjectName(String subject) {
+        return this.subjectRepository.findBySubject(subject);
+    }
 }
