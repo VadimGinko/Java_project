@@ -9,14 +9,15 @@ public class Student {
     public Student(){
     }
 
-    public Student(Integer studentId, String studentName, String studentSurname, String studentMiddleName, Faculty facultyName, String course, int group) {
+    public Student(Integer studentId, String studentName, String studentSurname, String studentMiddleName, String password, Faculty facultyName, String course, int groupOfStudent) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.studentSurname = studentSurname;
         this.studentMiddleName = studentMiddleName;
+        this.password = password;
         this.facultyName = facultyName;
         this.course = course;
-        this.groupOfStudent = group;
+        this.groupOfStudent = groupOfStudent;
     }
 
     @Id
@@ -25,11 +26,28 @@ public class Student {
     private String studentName;
     private String studentSurname;
     private String studentMiddleName;
+    private String password;
     @OneToOne
     private Faculty facultyName;
     private String course;
     private int groupOfStudent;
 
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getGroupOfStudent() {
+        return groupOfStudent;
+    }
+
+    public void setGroupOfStudent(int groupOfStudent) {
+        this.groupOfStudent = groupOfStudent;
+    }
     public void setGroup(int group) {
         this.groupOfStudent = group;
     }
