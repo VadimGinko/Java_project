@@ -1,9 +1,10 @@
 package com.example.students.controller;
 
-import com.example.students.model.Student;
 import com.example.students.model.Subject;
-import com.example.students.services.StudentService;
+import com.example.students.model.User;
+import com.example.students.services.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +16,11 @@ import java.util.List;
 
 @Slf4j
 @Controller
-public class IStudentsController {
-    public IStudentsController(com.example.students.services.SubjectService subjectService, StudentService studentService) {
-        this.SubjectService = subjectService;
-        this.studentService = studentService;
-    }
-
+public class IUsersController {
+    @Autowired
     private com.example.students.services.SubjectService SubjectService;
-    private com.example.students.services.StudentService studentService;
+    @Autowired
+    private com.example.students.services.UserService userService;
     private static List<Subject> albums = new ArrayList<>();
 
     static {
@@ -50,7 +48,7 @@ public class IStudentsController {
     public ModelAndView personList(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("albumlist");
-        List<Student> albums = this.studentService.findByStudentMiddleName("vadim");
+        List<User> albums = this.userService.findAll();
         model.addAttribute("albums", albums);
         log.info("/allalbums was called(GET)");
         return modelAndView;

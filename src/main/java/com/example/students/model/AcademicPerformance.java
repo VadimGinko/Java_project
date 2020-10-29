@@ -5,14 +5,15 @@ import java.util.List;
 
 @Entity
 public class AcademicPerformance {
-    public AcademicPerformance(){
-    }
-
-    public AcademicPerformance(Integer academicPerformanceId, Subject subject, String mark, Student student) {
+    public AcademicPerformance(Integer academicPerformanceId, Subject subject, User user, Integer mark, String discription) {
         this.academicPerformanceId = academicPerformanceId;
         this.subject = subject;
+        this.user = user;
         this.mark = mark;
-        this.student = student;
+        this.discription = discription;
+    }
+
+    public AcademicPerformance(){
     }
 
     @Id
@@ -20,9 +21,10 @@ public class AcademicPerformance {
     private Integer academicPerformanceId;
     @ManyToOne
     private Subject subject;
-    private String mark;
     @ManyToOne
-    private Student student;
+    private User user;
+    private Integer mark;
+    private String discription;
 
     public Integer getAcademicPerformanceId() {
         return academicPerformanceId;
@@ -40,19 +42,27 @@ public class AcademicPerformance {
         this.subject = subject;
     }
 
-    public String getMark() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getMark() {
         return mark;
     }
 
-    public void setMark(String mark) {
+    public void setMark(Integer mark) {
         this.mark = mark;
     }
 
-    public Student getStudent() {
-        return student;
+    public String getDiscription() {
+        return discription;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
 }
