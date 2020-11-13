@@ -1,0 +1,22 @@
+body {
+    background: #272125;
+    font-family: 'Roboto', sans-serif;
+}
+.list3b {
+    padding:0;
+    list-style: none;
+    counter-reset: li;
+}
+.list3b .inf_li{
+    border-left: 4px solid #DDDDDD;
+
+}
+
+.list3b li{
+    position: relative;
+    padding:16px 20px 16px 28px;
+    margin:0px 0 12px 0px;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+

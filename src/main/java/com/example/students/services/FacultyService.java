@@ -19,6 +19,6 @@ public class FacultyService implements IFacultyService {
 
     @Override
     public List<Faculty> findAll() {
-        return null;
+        return facultyRepository.findAll();
     }
 }

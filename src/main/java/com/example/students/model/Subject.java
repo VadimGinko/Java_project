@@ -1,9 +1,17 @@
 package com.example.students.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
 import javax.persistence.*;
+import java.util.List;
+
 
 @Entity
-public class Subject {
+@Table(name = "subjects")
+@Getter
+public class Subject extends BaseEntity{
     public Subject() {
     }
 
@@ -11,8 +19,11 @@ public class Subject {
         this.subject = subject;
     }
 
-    @Id
     private String subject;
+
+    @ManyToMany(mappedBy = "subjects")
+    @Column(name = "users")
+    private List<User> users;
 
     public String getSubject() {
         return subject;

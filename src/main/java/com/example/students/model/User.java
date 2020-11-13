@@ -1,124 +1,101 @@
 package com.example.students.model;
 
 
+import lombok.Data;
+import lombok.Getter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User {
+@Table(name = "users")
+@Data
+@Getter
+public class User extends BaseEntity{
     public User(){
     }
 
-    public User(Integer userId, String userName, String userSurname, String userMiddleName, String userPassword, Faculty facultyName, Integer userCourse, Integer userGroup, boolean active, Set<Role> roles) {
-        UserId = userId;
-        this.userName = userName;
-        this.userSurname = userSurname;
-        this.userMiddleName = userMiddleName;
-        this.userPassword = userPassword;
-        this.facultyName = facultyName;
-        this.userCourse = userCourse;
-        this.userGroup = userGroup;
-        this.active = active;
-        this.roles = roles;
-    }
+    @Column(name = "username")
+    private String username;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer UserId;
-    private String userName;
-    private String userSurname;
-    private String userMiddleName;
-    private String userPassword;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "middle_name")
+    private String middleName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private List<Role> roles;
+
     @OneToOne
     private Faculty facultyName;
+    @Column(name = "userCourse")
     private Integer userCourse;
+    @Column(name = "userGroup")
     private Integer userGroup;
-    private  boolean active;
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+    @ManyToMany()
+    @JoinTable(
+            name = "users_to_subjects",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    @Column(name = "subjects")
+    private List<Subject> subjects;
 
-    public Integer getUserId() {
-        return UserId;
-    }
-
-    public void setUserId(Integer userId) {
-        UserId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserSurname() {
-        return userSurname;
-    }
-
-    public void setUserSurname(String userSurname) {
-        this.userSurname = userSurname;
-    }
-
-    public String getUserMiddleName() {
-        return userMiddleName;
-    }
-
-    public void setUserMiddleName(String userMiddleName) {
-        this.userMiddleName = userMiddleName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public Faculty getFacultyName() {
-        return facultyName;
-    }
-
-    public void setFacultyName(Faculty facultyName) {
+    public User(String username, String firstName, String lastName, String middleName, String email, String password, List<Role> roles, Faculty facultyName, Integer userCourse, Integer userGroup, List<Subject> subjects) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
         this.facultyName = facultyName;
-    }
-
-    public Integer getUserCourse() {
-        return userCourse;
-    }
-
-    public void setUserCourse(Integer userCourse) {
         this.userCourse = userCourse;
+        this.userGroup = userGroup;
+        this.subjects = subjects;
     }
-
-    public Integer getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(Integer userGroup) {
+    public User(String username, String firstName, String lastName, String middleName, String email, String password, Faculty facultyName, Integer userCourse, Integer userGroup) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.email = email;
+        this.password = password;
+        this.facultyName = facultyName;
+        this.userCourse = userCourse;
         this.userGroup = userGroup;
     }
 
-    public boolean isActive() {
-        return active;
+    public User(String username, String firstName, String lastName, String middleName, String password,  List<Subject> subjects) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.subjects = subjects;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public User(String username, String firstName, String lastName, String middleName, String password) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
     }
 }
