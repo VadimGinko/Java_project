@@ -20,7 +20,7 @@ public class RegistrationStudentModel {
     private String email;
 
     @NotBlank(message = "Password cannot be empty")
-    @Length(min = 8, max = 16, message = "Password length must be between 8 and 40 characters")
+    @Length(min = 8, max = 16, message = "Password length must be between 8 and 16 characters")
     private String password;
 
     @NotBlank(message = "First Name cannot be empty")

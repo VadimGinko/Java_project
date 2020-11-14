@@ -28,7 +28,6 @@ public class RegistrationTeacherModel {
     @NotBlank(message = "Middle Name cannot be empty")
     private String middleName;
 
-    private List<Subject> subjects;
 
     public User ToUser(){
         return new User(

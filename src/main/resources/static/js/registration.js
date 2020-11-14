@@ -67,7 +67,6 @@ async function RegisterTeacher()
     let firstName = document.getElementById("firstNameTeacher").value;
     let middleName = document.getElementById("middleNameTeacher").value;
     let lastName = document.getElementById("lastNameTeacher").value;
-    let subject = document.getElementById("subjectTeacher").value;
     clearFieldsTeacher();
     if(password !== document.querySelector("#submitPasswordTeacher").value)
     {
@@ -84,7 +83,6 @@ async function RegisterTeacher()
                 firstName: firstName,
                 middleName: middleName,
                 lastName: lastName,
-                subject: subject,
             })
         });
     if(response.status === 201)
@@ -108,7 +106,6 @@ function clearFieldsTeacher(){
     document.getElementById("smfirstNameTeacher").innerHTML = "";
     document.getElementById("smlastNameTeacher").innerHTML = "";
     document.getElementById("smmiddleNameTeacher").innerHTML = "";
-    document.getElementById("smsubjectTeacher").innerHTML = "";
     document.getElementById("smsubmitPasswordTeacher").innerHTML = "";
     document.getElementById("res").innerHTML = "";
 }
@@ -136,4 +133,7 @@ function changeOnTeacherForm(){
 function changeOnStudentForm(){
     document.getElementById("student-div").style.display = "block";
     document.getElementById("teacher-div").style.display = "none";
+}
+hide_result = () =>{
+    document.getElementById("res").innerHTML = "";
 }

@@ -2,10 +2,7 @@ package com.example.students.rest;
 
 import com.example.students.Validator.StudentValidator;
 import com.example.students.Validator.TeacherValidator;
-import com.example.students.dto.AdminUserDto;
-import com.example.students.dto.AuthenticationRequestDto;
-import com.example.students.dto.StudentDto;
-import com.example.students.dto.TeacherDto;
+import com.example.students.dto.*;
 import com.example.students.exceptions.UserValidationException;
 import com.example.students.forms.RegistrationStudentModel;
 import com.example.students.forms.RegistrationTeacherModel;

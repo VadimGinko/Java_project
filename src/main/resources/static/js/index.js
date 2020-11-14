@@ -1,5 +1,6 @@
 load = async () => {
     let jwt = localStorage.getItem("jwt");
+    console.log(jwt + 'a');
     if(jwt== null){
         document.location.href = "/login";
     }
@@ -9,6 +10,7 @@ load = async () => {
             headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
         });
     let user_info_json = await user_info.json();
+    console.log(user_info_json);
     let length = Object.keys(user_info_json).length;
     document.getElementById("username").innerHTML = user_info_json.username;
 
@@ -23,13 +25,14 @@ load = async () => {
     //admin
     if(length == 8)
     {
-        ulk.innerHTML += "<li>firstName</li>"
-        ulk.innerHTML += "<li>lastName</li>"
-        ulk.innerHTML += "<li>email</li>"
-        ulk.innerHTML += "<li>middleName</li>"
-        ulk.innerHTML += "<li>facultyName</li>"
-        ulk.innerHTML += "<li>userCourse</li>"
-        ulk.innerHTML += "<li>userGroup</li>"
+        console.log("qq");
+        ulk.innerHTML += "<li>First Name</li>"
+        ulk.innerHTML += "<li>Surname</li>"
+        ulk.innerHTML += "<li>Email</li>"
+        ulk.innerHTML += "<li>Middle Name</li>"
+        ulk.innerHTML += "<li>Faculty</li>"
+        ulk.innerHTML += "<li>Course</li>"
+        ulk.innerHTML += "<li>Group</li>"
 
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.firstName + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.lastName + "</li>";
@@ -38,17 +41,31 @@ load = async () => {
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.facultyName.faculty + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.userCourse + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.userGroup + "</li>";
-    }else if(length == 4){
-        ulk.innerHTML += "<li>firstName</li>"
-        ulk.innerHTML += "<li>lastName</li>"
-        ulk.innerHTML += "<li>middleName</li>"
-        ulk.innerHTML += "<li>subjects</li>"
+        document.getElementById("but").innerHTML = "view ratings";
+    }else if(length == 5){
+        console.log("qq222");
+        ulk.innerHTML += "<li>First Name</li>"
+        ulk.innerHTML += "<li>Surname</li>"
+        ulk.innerHTML += "<li>Middle Name</li>"
+        ulk.innerHTML += "<li>Subjects</li>"
 
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.firstName + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.lastName + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.middleName + "</li>";
-        ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.subjects + "</li>";
+        var subjects = "";
+        user_info_json.subjects.subject.forEach(elem =>{
+            subjects += elem + ' '
+        })
+        ulv.innerHTML += "<li class=\"inf_li\">" + subjects + "</li>";
+        document.getElementById("but").innerHTML = "rate students";
+        document.getElementById("spisok").style.marginTop = "30px";
+    }else
+    {
+        document.getElementById("user_info").style.marginTop = "90px";
+        document.getElementById("spisok").style.marginTop = "50px";
+        document.getElementById("but").innerHTML = "admin panel";
     }
+
 }
 
 

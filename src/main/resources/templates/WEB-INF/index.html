@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  <title>Title</title>
+    <link rel="stylesheet" href="/wp-content/themes/MyTheme/bootstrap/css/bootstrap.min.css" type="text/css" media="screen, projection"/>
+
     <script th:src="@{/js/index.js}"></script>
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
@@ -16,22 +18,56 @@
             <a class="navbar-brand" id="username" href="/" style="color: #272125"></a>
           </div>
           <ul class="nav navbar-nav navbar-right">
-              <li><a onclick="logout()" style="color: #272125"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li><a onclick="logout()" style="color: #272125"><img height="20px" width="20px" th:src="@{/exit.svg}" alt="За стеклом"> Logout</a></li>
           </ul>
         </div>
       </nav>
 </header>
 <main>
-    <div style="display: flex;justify-content: center">
-        <div>
-            <ul id="keys" class="list3b">
+    <div class="container" style="padding-top: 50px">
+        <div class="row">
+            <div class="col-8" >
+                <div class="step__content" >
 
-            </ul>
-        </div>
-        <div>
-            <ul id="values" class="list3b">
+                    <h4 class="step__title">
+                        СДО БГТУ
+                    </h4>
+                    <div class="step__desc-wrapper">
+                        <p class="step__description">
+                            По вопросам работы с СДО и технической поддержки (смены пароля, регистрация или изменение учетных данных, др.) Вы можете обращаться:
+                        <ul>
+                            <li>по электронной почте dist@belstu.by</li>
+                            <li>по телефону (+375 17) 373 72 65</li>
+                            <li>в отдел дистанционных образовательных технологий, каб. 352, корп. 4.</li>
+                        </ul>
+                        </p>
+                        <p class="step__description">
+                            Для работы с системой дистанционного обучения у Вас должна быть создана учетная запись.
+                            Регистрация студентов и преподавателей в системе дистанционного обучения
+                            осуществляется отделом дистанционных образовательных технологий учебно-методического управления.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="user_info" class="col-4" >
+                <div class="container">
+                    <div id="spisok" class="row">
+                        <div class="col-6">
+                            <ul id="keys" class="list3b">
 
-            </ul>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul id="values" class="list3b">
+
+                            </ul>
+
+                        </div>
+                        <button type="button" id="but" class="btn btn-secondary btn-lg btn-block" style="margin-left: 35px; margin-bottom: 20px; height: 50px"></button>
+                    </div>
+                    </div>
+                </div>
+
         </div>
 </div>
 </main>

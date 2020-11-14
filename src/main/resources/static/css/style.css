@@ -8,21 +8,22 @@
 ::-ms-input-placeholder { color: #DEDFDF; }
 
 body {
-    background: #6ED0F6;
+    background: #272125;
     color: #fff;
-
 }
-
-
+.red {
+    color: #e74c3c!important;
+}
 
 .for {
     width: 370px;
     position: absolute;
     left: 10%;
-    top: 10%;
+    top: 3%;
 }
 input[type="number"] {
     vertical-align: top;
+    background: rgba(255,255,255,.2);
     outline: none;
     padding: 0;
     height: 40px;
@@ -31,7 +32,8 @@ input[type="number"] {
     display: inline-block;
     width: 100%;
     margin-top: 10px;
-    box-sizing: border-box;
+        box-sizing: border-box;
+        color: white;
     border: 1px solid #ddd;
     font-size: 14px;
     border-radius: 3px;
@@ -56,11 +58,10 @@ input[type=radio]:checked + label { opacity: 1; }
 
 input[type=text],
 input[type=password] {
-    background: #fff;
+    background: rgba(255,255,255,.2);
     border: none;
     border-radius: 8px;
     font-size: 17px;
-    font-family: 'Raleway', sans-serif;
     height: 42px;
     width: 99.5%;
     margin-top: 10px;
@@ -70,12 +71,11 @@ input[type=password] {
 }
 
 button {
-    background: #079BCF;
+    background: #e74c3c;
     border: none;
     border-radius: 8px;
     color: #fff;
     cursor: pointer;
-    font-family: 'Raleway', sans-serif;
     font-size: 17px;
     height: 42px;
     width: 100%;
@@ -94,24 +94,42 @@ button span {
 
 
 
-
+.white {
+    color: white;
+}
 
 /*select*/
 
 .select,
 .label {
+    background: rgba(255,255,255,.2);
     color: #414141;
     display: block;
     font: 400 17px/2em 'Source Sans Pro', sans-serif;
 }
-
+select option{
+    color:black;
+    background-color: rgba(255,255,255,.2)!important;
+}
 .select {
+    background-color: rgba(255,255,255,.2);
     width: 100%;
     top: 0;
     padding: 5px 0;
     height: 40px;
 
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    background: none transparent;
     border: 0 none;
+}
+input:focus::-webkit-input-placeholder {
+    color: #e74c3c;
+}
+
+input::-webkit-input-placeholder {
+    color: white;
+}
+input:focus {
+    outline-color: rgba(0,0,0,0);
+    background: rgba(255,255,255,.95);
+    color: #e74c3c;
 }
