@@ -42,7 +42,7 @@ public class User extends BaseEntity{
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
 
-    @OneToOne
+    @ManyToOne
     private Faculty facultyName;
     @Column(name = "userCourse")
     private Integer userCourse;

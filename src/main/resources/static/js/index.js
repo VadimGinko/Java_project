@@ -1,6 +1,6 @@
 load = async () => {
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt + 'a');
+    console.log(jwt);
     if(jwt== null){
         document.location.href = "/login";
     }

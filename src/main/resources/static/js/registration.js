@@ -118,6 +118,7 @@ async function Register2() {
     let data = await response.json();
     var select = document.getElementById("select-box1");
     var i = 1;
+    console.log(response);
     data.forEach(el => {
         select.innerHTML += "<option value=\"Choice " + i + "\">" + el.faculty + "</option>";
         i++;
