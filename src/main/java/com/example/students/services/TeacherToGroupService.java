@@ -7,6 +7,7 @@ import com.example.students.repositories.ISubjectRepository;
 import com.example.students.repositories.ITeacherToGroupRepository;
 import com.example.students.repositories.IUserRepository;
 import com.example.students.services.serviceInterfaces.ITeacherToGroupService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+@Slf4j
 @Service
 public class TeacherToGroupService implements ITeacherToGroupService {
     private final ITeacherToGroupRepository iTeacherToGroupRepository;
@@ -43,6 +44,7 @@ public class TeacherToGroupService implements ITeacherToGroupService {
         teacherToGroup.setCreated(new Date());
         teacherToGroup.setUpdated(new Date());
         iTeacherToGroupRepository.save(teacherToGroup);
+        log.info("TeacherToGroupService : addRecord");
     }
 
     @Override
@@ -59,6 +61,7 @@ public class TeacherToGroupService implements ITeacherToGroupService {
                 break;
             }
         }
+        log.info("TeacherToGroupService : getStudents");
         return students;
     }
 }

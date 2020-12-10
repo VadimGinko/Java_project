@@ -18,11 +18,9 @@ async function setStudents() {
             headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Bearer_' + jwt}
         });
     let data = await response.json();
-    console.log(data);
     var select2 = document.getElementById("students");
     select2.innerHTML = "";
     var i = 1;
-    console.log(data);
     data.forEach(el => {
         select2.innerHTML += "<option value=\"" + el.username + "\">" + el.lastName+ " " + el.firstName +  "</option>";
         i++;
@@ -64,7 +62,6 @@ async function setFaculties() {
 
 load = async () => {
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if (jwt == null) {
         document.location.href = "/login";
     }
@@ -74,7 +71,6 @@ load = async () => {
             headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
         });
     let user_info_json = await user_info.json();
-    console.log(user_info_json);
     let length = Object.keys(user_info_json).length;
     document.getElementById("username").innerHTML = user_info_json.username;
     setSubjects();
@@ -116,4 +112,8 @@ async function rate(){
                 });
         }
     }
+}
+logout = () => {
+    localStorage.clear();
+    document.location.href = "/login";
 }

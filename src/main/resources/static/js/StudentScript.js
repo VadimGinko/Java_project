@@ -9,7 +9,6 @@ async function setFaculties() {
             headers: {'Authorization': 'Bearer_' + jwt,'Content-Type': 'application/json', 'Accept': 'application/json'}
         });
     let data = await response.json();
-    console.log(data)
     var select = document.getElementById("subjects");
 
     var i = 1;
@@ -22,7 +21,6 @@ async function setFaculties() {
 
 load = async () => {
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if (jwt == null) {
         document.location.href = "/login";
     }
@@ -32,7 +30,6 @@ load = async () => {
             headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
         });
     let user_info_json = await user_info.json();
-    console.log(user_info_json);
     let length = Object.keys(user_info_json).length;
     document.getElementById("username").innerHTML = user_info_json.username;
     setFaculties();
@@ -40,7 +37,6 @@ load = async () => {
 let page = 0;
 getMarks = async () => {
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if (jwt == null) {
         document.location.href = "/login";
     }
@@ -69,7 +65,6 @@ getMarks = async () => {
 
 prev = async () =>{
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if (jwt == null) {
         document.location.href = "/login";
     }
@@ -83,7 +78,6 @@ prev = async () =>{
             headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
         });
     let user_info_json = await user_info.json();
-    console.log(user_info_json);
     let content = document.getElementById("content");
     content.innerHTML = "";
     user_info_json.content.forEach(el => {
@@ -97,7 +91,6 @@ prev = async () =>{
 
 next = async () =>{
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if (jwt == null) {
         document.location.href = "/login";
     }
@@ -111,7 +104,6 @@ next = async () =>{
             headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
         });
     let user_info_json = await user_info.json();
-    console.log(user_info_json);
     let content = document.getElementById("content");
     content.innerHTML = "";
     user_info_json.content.forEach(el => {
@@ -140,3 +132,7 @@ checkDisabled = (user_info_json) =>  {
 }
 
 load();
+logout = () => {
+    localStorage.clear();
+    document.location.href = "/login";
+}

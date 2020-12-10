@@ -1,6 +1,5 @@
 load = async () => {
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if(jwt== null){
         document.location.href = "/login";
     }
@@ -10,7 +9,6 @@ load = async () => {
             headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
         });
     let user_info_json = await user_info.json();
-    console.log(user_info_json);
     let length = Object.keys(user_info_json).length;
     document.getElementById("username").innerHTML = user_info_json.username;
 
@@ -21,11 +19,9 @@ load = async () => {
 
     ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.username + "</li>";
 
-    console.log(user_info_json)
     //admin
     if(length == 8)
     {
-        console.log("qq");
         ulk.innerHTML += "<li>First Name</li>"
         ulk.innerHTML += "<li>Surname</li>"
         ulk.innerHTML += "<li>Email</li>"
@@ -45,7 +41,6 @@ load = async () => {
         ulk2.innerHTML += "<button type=\"button\" id=\"but\" class=\"btn btn-secondary btn-lg btn-block\" onclick='onStudentPage()' style=\"margin-left: 35px; margin-bottom: 20px; height: 50px; width:280px\"></button>";
         document.getElementById("but").innerHTML = "view ratings";
     }else if(length == 4){
-        console.log("qq222");
         ulk.innerHTML += "<li>First Name</li>"
         ulk.innerHTML += "<li>Surname</li>"
         ulk.innerHTML += "<li>Middle Name</li>"

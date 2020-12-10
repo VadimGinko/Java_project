@@ -4,11 +4,14 @@ import com.example.students.model.Status;
 import com.example.students.model.Subject;
 import com.example.students.repositories.ISubjectRepository;
 import com.example.students.services.serviceInterfaces.ISubjectService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+
+@Slf4j
 @Service
 public class SubjectService implements ISubjectService {
     private final ISubjectRepository subjectRepository;
@@ -20,12 +23,8 @@ public class SubjectService implements ISubjectService {
 
     @Override
     public List<Subject> findAll() {
+        log.info("SubjectService : findAll");
         return this.subjectRepository.findAll();
-    }
-
-    @Override
-    public List<Subject> findBySubjectName(String subject) {
-        return this.subjectRepository.findBySubject(subject);
     }
 
     @Override
@@ -33,6 +32,7 @@ public class SubjectService implements ISubjectService {
         Subject deSubject = this.subjectRepository.findBySubject(subject).get(0);
         deSubject.setStatus(Status.DELETED);
         this.subjectRepository.save(deSubject);
+        log.info("SubjectService : deleteSubjectByName");
     }
 
     @Override
@@ -43,6 +43,7 @@ public class SubjectService implements ISubjectService {
         subject1.setUpdated(new Date());
         subject1.setSubject(subject);
         this.subjectRepository.save(subject1);
+        log.info("SubjectService : addSubject");
     }
 
 }

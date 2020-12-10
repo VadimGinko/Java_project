@@ -11,6 +11,7 @@ import com.example.students.security.jwt.JwtTokenProvider;
 import com.example.students.services.FacultyService;
 import com.example.students.services.SubjectService;
 import com.example.students.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,13 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * REST controller for authentication requests (login, logout, register, etc.)
- *
- * @author Eugene Suleimanov
- * @version 1.0
- */
-
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/auth")
 public class AuthenticationRestControllerV1 {
@@ -72,7 +67,7 @@ public class AuthenticationRestControllerV1 {
 
         User user = userDetails.ToUser();
         userService.register(user);
-
+        log.info("Get request : /api/v1/auth/registerStudent");
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
@@ -87,7 +82,7 @@ public class AuthenticationRestControllerV1 {
 
         User user = teacherDetails.ToUser();
         userService.register(user);
-
+        log.info("Get request : /api/v1/auth/registerTeacher");
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
@@ -105,15 +100,17 @@ public class AuthenticationRestControllerV1 {
 
             Map<Object, Object> response = new HashMap<>();
             response.put("token", token);
-
+            log.info("Get request : /api/v1/auth/login");
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
+            log.info("Get request : /api/v1/auth/login ---- Invalid username or password");
             throw new BadCredentialsException("Invalid username or password");
         }
     }
 
     @GetMapping(value = {"/faculties"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Faculty>> facultyList() {
+        log.info("Get request : /api/v1/auth/faculties");
         return new ResponseEntity<>(facultyService.findAll(), HttpStatus.OK);
     }
 
@@ -134,7 +131,6 @@ public class AuthenticationRestControllerV1 {
         Map<Object, Object> response = new HashMap<>();
         response.put("username", username);
         response.put("role", role.getName());
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

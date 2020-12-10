@@ -7,6 +7,7 @@ import com.example.students.model.User;
 import com.example.students.repositories.IRoleRepository;
 import com.example.students.repositories.IUserRepository;
 import com.example.students.services.serviceInterfaces.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Service
 public class    UserService implements IUserService {
     private IUserRepository userRepository;
@@ -43,37 +44,43 @@ public class    UserService implements IUserService {
         user.setStatus(Status.ACTIVE);
         user.setCreated(new Date());
         user.setUpdated(new Date());
+        log.info("{} registered" , user);
         return userRepository.save(user);
     }
 
     @Override
     public List<User> getAll() {
+        log.info("UserService : getAll");
         return userRepository.findAll();
     }
 
     @Override
     public User findByUsername(String username) {
+        log.info("UserService : findByUsername");
         return userRepository.findByUsername(username);
     }
 
     @Override
     public User findByEmail(String mail) {
+        log.info("UserService : findByEmail");
         return userRepository.findByEmail(mail);
     }
 
     @Override
     public User findById(Long id) {
-
+        log.info("UserService : findById");
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
     public void delete(Long id) {
+        log.info("UserService : delete");
         userRepository.deleteById(id);
     }
 
     @Override
     public List<User> getTeachers() {
+        log.info("UserService : getTeachers");
         return userRepository.findAll().stream()
                                                .filter(x -> x.getRoles().get(0).getName().equals("ROLE_TEACHER"))
                                                .collect(Collectors.toList());

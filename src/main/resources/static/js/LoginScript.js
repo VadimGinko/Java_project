@@ -19,7 +19,6 @@ async function Login()
     {
         localStorage.setItem("jwt", data.token);
 
-        console.log(localStorage.getItem("jwt"));
         document.location.href = "/";
     }
     else

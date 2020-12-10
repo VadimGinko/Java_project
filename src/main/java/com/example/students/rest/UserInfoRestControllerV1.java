@@ -2,37 +2,27 @@ package com.example.students.rest;
 
 import com.example.students.Validator.StudentValidator;
 import com.example.students.Validator.TeacherValidator;
-import com.example.students.dto.*;
-import com.example.students.exceptions.UserValidationException;
-import com.example.students.forms.RegistrationStudentModel;
-import com.example.students.forms.RegistrationTeacherModel;
-import com.example.students.model.Faculty;
+import com.example.students.dto.AdminUserDto;
+import com.example.students.dto.StudentDto;
+import com.example.students.dto.TeacherDto;
 import com.example.students.model.Role;
-import com.example.students.model.Subject;
 import com.example.students.model.User;
 import com.example.students.security.jwt.JwtTokenProvider;
 import com.example.students.services.FacultyService;
 import com.example.students.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/userinfo")
 public class UserInfoRestControllerV1 {
@@ -63,12 +53,15 @@ public class UserInfoRestControllerV1 {
         Role role = user.getRoles().get(0);
         if(role.getName().equals("ROLE_STUDENT")) {
             StudentDto studentDto = StudentDto.fromUser(user);
+            log.info("Get request : /api/v1/userinfo/ -- ROLE_STUDENT");
             return new ResponseEntity<>(studentDto, HttpStatus.OK);
         }else if(role.getName().equals("ROLE_TEACHER")){
             TeacherDto teacherDto = TeacherDto.fromUser(user);
+            log.info("Get request : /api/v1/userinfo/ -- ROLE_TEACHER");
             return new ResponseEntity<>(teacherDto, HttpStatus.OK);
         }else{
             AdminUserDto adminUserDto = AdminUserDto.fromUser(user);
+            log.info("Get request : /api/v1/userinfo/ -- ADMIN");
             return new ResponseEntity<>(adminUserDto, HttpStatus.OK);
         }
     }

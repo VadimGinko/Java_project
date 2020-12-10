@@ -10,21 +10,19 @@ import com.example.students.repositories.ISubjectRepository;
 import com.example.students.repositories.IUserRepository;
 import com.example.students.services.PerfomanceService;
 import com.example.students.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/students/")
 public class StudentRestControllerV1 {
@@ -51,13 +49,14 @@ public class StudentRestControllerV1 {
         }
 
         StudentDto result = StudentDto.fromUser(user);
-
+        log.info("Get request : /api/v1/auth/username");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(value = "getUserSubjects")
     public ResponseEntity<List<String>> getStudentByUsername(@RequestParam Map<String, String> mapParam){
         var username = mapParam.get("username");
+        log.info("Get request : /api/v1/auth/getUserSubjects");
         return new ResponseEntity<>(perfomanceService.findByUser(username), HttpStatus.OK);
     }
 
@@ -75,6 +74,7 @@ public class StudentRestControllerV1 {
         for(var i:q){
             i.getUser().setRoles(List.of(new Role()));
         }
+        log.info("Get request : /api/v1/auth/getUserMarks");
         return q;
     }
 }

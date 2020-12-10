@@ -1,6 +1,7 @@
 package com.example.students.exceptions.Handlers;
 
 import com.example.students.exceptions.UserValidationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -35,7 +37,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         body.put("errors", errors);
-
+        log.info(errors.toString());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 

@@ -10,6 +10,7 @@ import com.example.students.repositories.IPerfomanceRepository;
 import com.example.students.repositories.ISubjectRepository;
 import com.example.students.repositories.IUserRepository;
 import com.example.students.services.serviceInterfaces.IPerfomanceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class PerfomanceService implements IPerfomanceService {
     private final IPerfomanceRepository perfomanceRepository;
@@ -31,11 +33,6 @@ public class PerfomanceService implements IPerfomanceService {
         this.perfomanceRepository = perfomanceRepository;
         this.iSubjectRepository = iSubjectRepository;
         this.iUserRepository = iUserRepository;
-    }
-
-    @Override
-    public List<PerfomanceService> findAll() {
-        return null;
     }
 
     @Override
@@ -61,7 +58,7 @@ public class PerfomanceService implements IPerfomanceService {
         //message.setTo(user1.getEmail());
         message.setSubject("СДО BSTU");
         message.setText(String.format("Предмет: %s; Оценка: %d; %s",rateDto.getSubject(), rateDto.getMark(), rateDto.getDescription()));
-
+        log.info("PerfomanceService : rate + mail sended");
         this.emailSender.send(message);
     }
 
@@ -70,6 +67,7 @@ public class PerfomanceService implements IPerfomanceService {
         User user1 = iUserRepository.findByUsername(user);
         var list = perfomanceRepository.findByUser(user1);
         List<String> listSubjectNames = list.stream().map(i -> i.getSubject().getSubject()).distinct().collect(Collectors.toList());
+        log.info("PerfomanceService : findByUser");
         return listSubjectNames;
     }
 }

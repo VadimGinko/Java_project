@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 
-
-
 public class JwtUser implements UserDetails {
 
     private final Long id;

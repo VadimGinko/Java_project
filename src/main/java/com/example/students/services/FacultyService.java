@@ -5,11 +5,14 @@ import com.example.students.model.Status;
 import com.example.students.model.Subject;
 import com.example.students.repositories.IFacultyRepository;
 import com.example.students.services.serviceInterfaces.IFacultyService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+
+@Slf4j
 @Service
 public class FacultyService implements IFacultyService {
     private final IFacultyRepository facultyRepository;
@@ -21,6 +24,7 @@ public class FacultyService implements IFacultyService {
 
     @Override
     public List<Faculty> findAll() {
+        log.info("FacultyService : find All Faculty");
         return facultyRepository.findAll();
     }
 
@@ -28,6 +32,7 @@ public class FacultyService implements IFacultyService {
     public void addFaculty(String facultyName) {
         Faculty faculty = new Faculty();
         faculty.setFaculty(facultyName);
+        log.info("FacultyService : add Faculty");
         this.facultyRepository.save(faculty);
     }
 }

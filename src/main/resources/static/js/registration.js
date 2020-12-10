@@ -52,7 +52,6 @@ async function Register()
     else
     {
         let data = await response.json();
-        console.log(data);
         data.errors.forEach(err =>
         {
             document.getElementById("sm" + err.field).innerHTML = err.message;
@@ -61,12 +60,10 @@ async function Register()
 }
 async function addSubject(){
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if(jwt== null){
         document.location.href = "/login";
     }
     let subjName = document.getElementById("addSubjectName").value;
-    console.log(subjName)
     await fetch("/api/v1/admin/addSubject",
         {
             method: 'POST',
@@ -81,12 +78,10 @@ async function addSubject(){
 
 async function addFaculty(){
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if(jwt== null){
         document.location.href = "/login";
     }
     let facultyName = document.getElementById("addFacultyName").value;
-    console.log(facultyName)
     await fetch("/api/v1/admin/addFaculty",
         {
             method: 'POST',
@@ -101,7 +96,6 @@ async function addFaculty(){
 
 async function addTeacherToGroup() {
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if (jwt == null) {
         document.location.href = "/login";
     }
@@ -136,13 +130,11 @@ async function addTeacherToGroup() {
 
 async function deleteSubject(){
     let jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if(jwt== null){
         document.location.href = "/login";
     }
     let sel = document.getElementById("select-box2");
     let subjectName = sel.options[sel.selectedIndex].textContent;
-    console.log(subjectName)
     await fetch("/api/v1/admin/deActivateSubject",
         {
             method: 'PUT',
@@ -188,7 +180,6 @@ async function RegisterTeacher()
     else
     {
         let data = await response.json();
-        console.log(data);
         data.errors.forEach(err =>
         {
             document.getElementById("sm" + err.field + "Teacher").innerHTML = err.message;
@@ -251,7 +242,6 @@ async function setTeachers() {
     var select2 = document.getElementById("teachers");
     select2.innerHTML = "";
     var i = 1;
-    console.log(data);
     data.forEach(el => {
         select2.innerHTML += "<option value=\"Choice " + i + "\">" + el.username  + "</option>";
         i++;
@@ -274,3 +264,4 @@ function changeOnStudentForm(){
 hide_result = () =>{
     document.getElementById("res").innerHTML = "";
 }
+
