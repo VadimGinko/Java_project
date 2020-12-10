@@ -10,7 +10,9 @@ import com.example.students.services.serviceInterfaces.ITeacherToGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -41,5 +43,22 @@ public class TeacherToGroupService implements ITeacherToGroupService {
         teacherToGroup.setCreated(new Date());
         teacherToGroup.setUpdated(new Date());
         iTeacherToGroupRepository.save(teacherToGroup);
+    }
+
+    @Override
+    public List<User> getStudents(String facultyName, String subjectName, Integer group, Integer course, String username) {
+        Faculty faculty = iFacultyRepository.findByFaculty(facultyName);
+        Subject subject = iSubjectRepository.findBySubject(subjectName).get(0);
+        User user1 = iUserRepository.findByUsername(username);
+
+        var subjList = iTeacherToGroupRepository.findByUser(user1);
+        List<User> students = new ArrayList<>();
+        for(var i: subjList){
+            if(i.getSubject().getSubject().equals(subject.getSubject())){
+                students = iUserRepository.findByUserCourseAndFacultyNameAndUserGroup(course, faculty, group);
+                break;
+            }
+        }
+        return students;
     }
 }

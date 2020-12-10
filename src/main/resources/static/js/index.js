@@ -42,7 +42,7 @@ load = async () => {
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.userCourse + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.userGroup + "</li>";
         let ulk2 = document.getElementById("buttt");
-        ulk2.innerHTML += "<button type=\"button\" id=\"but\" class=\"btn btn-secondary btn-lg btn-block\" onclick='onTeacherPage()' style=\"margin-left: 35px; margin-bottom: 20px; height: 50px; width:280px\"></button>";
+        ulk2.innerHTML += "<button type=\"button\" id=\"but\" class=\"btn btn-secondary btn-lg btn-block\" onclick='onStudentPage()' style=\"margin-left: 35px; margin-bottom: 20px; height: 50px; width:280px\"></button>";
         document.getElementById("but").innerHTML = "view ratings";
     }else if(length == 4){
         console.log("qq222");
@@ -74,11 +74,11 @@ onAdminPage = () => {
 }
 
 onStudentPage = () => {
-    document.location.href = "/login";
+    document.location.href = "/student";
 }
 
 onTeacherPage = () => {
-    document.location.href = "/login";
+    document.location.href = "/teacher";
 }
 
 logout = () => {

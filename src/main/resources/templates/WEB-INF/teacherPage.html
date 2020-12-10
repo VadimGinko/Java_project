@@ -2,10 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  <title>Title</title>
+    <link rel="stylesheet" href="/wp-content/themes/MyTheme/bootstrap/css/bootstrap.min.css" type="text/css" media="screen, projection"/>
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <script th:src="@{/js/OrderScript.js}"></script>
+    <script th:src="@{/js/TeacherScript.js}"></script>
 </head>
 <body>
+<header>
+    <nav class="navbar navbar-inverse" style="background-color: rgb(170, 159, 138);">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" id="username" href="/" style="color: #272125"></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a onclick="logout()" style="color: #272125"><img height="20px" width="20px" th:src="@{/exit.svg}" alt="За стеклом"> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div style="width: 20%;margin:0 auto;">
+        <select id="faculties"  style="margin-top: 20px; margin-bottom: 10px; background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+        </select>
+        <select id="subjects"  style="margin-top: 20px; margin-bottom: 10px; background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+        </select>
+        <input style="margin-top: 20px; margin-bottom: 10px"  id="userGroup" type="number" placeholder="Enter userGroup" value="1" min="1" max="20">
+        <input style="margin-top: 20px; margin-bottom: 10px"  id="userCourse" type="number" placeholder="Enter userGroup" value="1" min="1" max="20">
+        <button content="Register"  onclick="setStudents()" type="submit">
+            Show
+        </button>
 
+    </div>
+    <div style="display: flex">
+        <select id="students" style="margin: 20px 30px 10px;background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+        </select>
+        <input style="margin: 20px 30px 10px;"  id="mark" type="number" placeholder="Enter userGroup" value="1" min="1" max="20">
+        <input style="margin: 20px 30px 10px;" id="description" class="white" type="text" placeholder="Enter description">
+        <button content="Register" style="margin: 20px 30px 10px;"  onclick="rate()" type="submit">
+            give a rating
+        </button>
+    </div>
+    <h2 id="subj" style="text-align: center"></h2>
+</main>
 </body>
 </html>
