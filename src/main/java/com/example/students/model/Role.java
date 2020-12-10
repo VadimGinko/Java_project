@@ -9,6 +9,8 @@ import java.util.List;
 @Table(name = "roles")
 @Data
 public class Role extends BaseEntity {
+    public Role() {
+    }
 
     @Column(name = "name")
     private String name;
