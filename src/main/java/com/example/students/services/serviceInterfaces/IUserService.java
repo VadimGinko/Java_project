@@ -1,5 +1,6 @@
 package com.example.students.services.serviceInterfaces;
 
+import com.example.students.dto.TeacherDto;
 import com.example.students.model.User;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface IUserService {
     User findByEmail(String userName);
     User findById(Long id);
     void delete(Long id);
-
+    List<User> getTeachers();
 }

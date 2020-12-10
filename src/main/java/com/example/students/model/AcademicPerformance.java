@@ -4,9 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class AcademicPerformance {
+public class AcademicPerformance extends BaseEntity{
     public AcademicPerformance(Integer academicPerformanceId, Subject subject, User user, Integer mark, String discription) {
-        this.academicPerformanceId = academicPerformanceId;
         this.subject = subject;
         this.user = user;
         this.mark = mark;
@@ -16,23 +15,13 @@ public class AcademicPerformance {
     public AcademicPerformance(){
     }
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer academicPerformanceId;
+
     @ManyToOne
     private Subject subject;
     @ManyToOne
     private User user;
     private Integer mark;
     private String discription;
-
-    public Integer getAcademicPerformanceId() {
-        return academicPerformanceId;
-    }
-
-    public void setAcademicPerformanceId(Integer academicPerformanceId) {
-        this.academicPerformanceId = academicPerformanceId;
-    }
 
     public Subject getSubject() {
         return subject;

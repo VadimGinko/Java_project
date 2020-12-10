@@ -21,4 +21,5 @@ public class Faculty {
 
     @Id
     private String faculty;
+
 }

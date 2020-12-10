@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IFacultyService {
     List<Faculty> findAll();
+    void addFaculty(String facultyName);
 }

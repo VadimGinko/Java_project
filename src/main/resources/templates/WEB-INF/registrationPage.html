@@ -11,79 +11,115 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="for">
-    <h3 >Register</h3>
-    <div id="wrapper">
-        <div>
-            <div class="form-check">
-                <input onclick="changeOnStudentForm()" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+<div style="display: flex">
+    <div class="for">
+        <h3 >Register</h3>
+        <div id="wrapper">
+            <div>
+                <div class="form-check">
+                    <input onclick="changeOnStudentForm()" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
 
-                <label class="form-check-label" for="exampleRadios1">
-                    Student
-                </label>
-                <br/>
-                <input onclick="changeOnTeacherForm()"  class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                    <label class="form-check-label" for="exampleRadios1">
+                        Student
+                    </label>
+                    <br/>
+                    <input onclick="changeOnTeacherForm()"  class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
 
-                <label class="form-check-label" for="exampleRadios2">
-                    Teacher
-                </label>
+                    <label class="form-check-label" for="exampleRadios2">
+                        Teacher
+                    </label>
+                </div>
+                <div class="form-check">
+                </div>
             </div>
-            <div class="form-check">
+            <div id="student-div" onclick="hide_result()">
+                <input id="username" type="text" class="white" placeholder="Enter login ">
+                <small id="smusername" class="form-text text-muted red"></small>
+                <input id="email" type="text" class="white" placeholder="Enter your E-mail">
+                <small id="smemail" class="form-text text-muted red"></small>
+
+                <input id="password" class="white" type="password" placeholder="Enter password">
+                <small id="smpassword" class="form-text text-muted red"></small>
+
+                <input id="firstName" class="white" type="text" placeholder="Enter firstName">
+                <small id="smfirstName" class="form-text text-muted red"></small>
+
+                <input id="lastName" class="white" type="text" placeholder="Enter lastName">
+                <small id="smlastName" class="form-text text-muted red"></small>
+
+                <input id="middleName" class="white" type="text" placeholder="Enter middleName">
+                <small id="smmiddleName" class="form-text text-muted red"></small>
+
+                <select id="select-box1"  style="margin-top: 20px; margin-bottom: 10px; background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+                </select>
+                <input  id="userCourse" type="number" placeholder="Enter userCourse" value="1" min="1" max="6">
+                <input style="margin-top: 20px; margin-bottom: 10px"  id="userGroup" type="number" placeholder="Enter userGroup" value="1" min="1" max="20">
+                <input id="submitPassword" class="white" type="password" placeholder="Submit password">
+                <small id="smsubmitPassword" class="form-text text-muted red"></small>
+                <button content="Register"  onclick="Register()" type="submit">
+                    Register
+                </button>
+            </div>
+            <div id="teacher-div" style="display: none" onclick="hide_result()">
+                <input id="usernameTeacher" class="white" type="text" placeholder="Enter login">
+                <small id="smusernameTeacher" class="form-text text-muted red"></small>
+
+                <input id="passwordTeacher" class="white" type="password" placeholder="Enter password">
+                <small id="smpasswordTeacher" class="form-text text-muted red"></small>
+
+                <input id="firstNameTeacher" class="white" type="text" placeholder="Enter First Name">
+                <small id="smfirstNameTeacher" class="form-text text-muted red"></small>
+
+                <input id="lastNameTeacher" class="white" type="text" placeholder="Enter Surname">
+                <small id="smlastNameTeacher" class="form-text text-muted red"></small>
+
+                <input id="middleNameTeacher" class="white" type="text" placeholder="Enter Middle name">
+                <small id="smmiddleNameTeacher" class="form-text text-muted red"></small>
+
+                <input id="submitPasswordTeacher" class="white" type="password" placeholder="Submit password">
+                <small id="smsubmitPasswordTeacher" class="form-text text-muted red"></small>
+
+                <button content="Register"  onclick="RegisterTeacher()" type="submit">
+                    Register2
+                </button>
             </div>
         </div>
-        <div id="student-div" onclick="hide_result()">
-            <input id="username" type="text" class="white" placeholder="Enter login ">
-            <small id="smusername" class="form-text text-muted red"></small>
-            <input id="email" type="text" class="white" placeholder="Enter your E-mail">
-            <small id="smemail" class="form-text text-muted red"></small>
-
-            <input id="password" class="white" type="password" placeholder="Enter password">
-            <small id="smpassword" class="form-text text-muted red"></small>
-
-            <input id="firstName" class="white" type="text" placeholder="Enter firstName">
-            <small id="smfirstName" class="form-text text-muted red"></small>
-
-            <input id="lastName" class="white" type="text" placeholder="Enter lastName">
-            <small id="smlastName" class="form-text text-muted red"></small>
-
-            <input id="middleName" class="white" type="text" placeholder="Enter middleName">
-            <small id="smmiddleName" class="form-text text-muted red"></small>
-
-            <select id="select-box1"  style="margin-top: 20px; margin-bottom: 10px; background-color: rgba(255,255,255,.2); color: white;" class="form-control">
-            </select>
-            <input  id="userCourse" type="number" placeholder="Enter userCourse" value="1" min="1" max="6">
-            <input style="margin-top: 20px; margin-bottom: 10px"  id="userGroup" type="number" placeholder="Enter userGroup" value="1" min="1" max="20">
-            <input id="submitPassword" class="white" type="password" placeholder="Submit password">
-            <small id="smsubmitPassword" class="form-text text-muted red"></small>
-            <button content="Register"  onclick="Register()" type="submit">
-                Register
-            </button>
-        </div>
-        <div id="teacher-div" style="display: none" onclick="hide_result()">
-            <input id="usernameTeacher" class="white" type="text" placeholder="Enter login">
-            <small id="smusernameTeacher" class="form-text text-muted red"></small>
-
-            <input id="passwordTeacher" class="white" type="password" placeholder="Enter password">
-            <small id="smpasswordTeacher" class="form-text text-muted red"></small>
-
-            <input id="firstNameTeacher" class="white" type="text" placeholder="Enter First Name">
-            <small id="smfirstNameTeacher" class="form-text text-muted red"></small>
-
-            <input id="lastNameTeacher" class="white" type="text" placeholder="Enter Surname">
-            <small id="smlastNameTeacher" class="form-text text-muted red"></small>
-
-            <input id="middleNameTeacher" class="white" type="text" placeholder="Enter Middle name">
-            <small id="smmiddleNameTeacher" class="form-text text-muted red"></small>
-
-            <input id="submitPasswordTeacher" class="white" type="password" placeholder="Submit password">
-            <small id="smsubmitPasswordTeacher" class="form-text text-muted red"></small>
-
-            <button content="Register"  onclick="RegisterTeacher()" type="submit">
-                Register2
-            </button>
-        </div>
+        <h1 id="res" style="text-align:  center"></h1>
     </div>
-    <h1 id="res" style="text-align:  center"></h1>
+    <div style="margin:0 auto;">
+        <h3 style="text-align:center;" >Add new subject</h3>
+        <input id="addSubjectName" type="text" class="white" placeholder="Enter new Subject">
+        <button content="Register"  onclick="addSubject()" type="submit">
+            Add
+        </button>
+
+        <h3 style="text-align:center; margin-top: 20px">Delete subject</h3>
+        <select id="select-box2"  style="margin-top: 20px; margin-bottom: 10px; background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+        </select>
+        <button content="Register"  onclick="deleteSubject()" type="submit">
+            Delete
+        </button>
+
+        <h3 style="text-align:center; margin-top: 20px">Add new Faculty</h3>
+        <input id="addFacultyName" type="text" class="white" placeholder="Enter new Faculty">
+        <button content="Register"  onclick="addFaculty()" type="submit">
+            Add
+        </button>
+
+        <h3 style="text-align:center; margin-top: 20px" >Assign a group to the teacher</h3>
+        <select id="select-box3"  style="margin-top: 20px; margin-bottom: 10px; background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+        </select>
+        <input  id="Course" type="number" placeholder="Enter userCourse" value="1" min="1" max="6">
+        <input  id="Group" type="number" placeholder="Enter userCourse" value="1" min="1" max="20">
+        <select id="teachers"  style="margin-top: 20px; margin-bottom: 10px; background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+        </select>
+        <select id="subjects"  style="margin-top: 20px; margin-bottom: 10px; background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+        </select>
+        <button content="Register"  onclick="addTeacherToGroup()" type="submit">
+            Assign
+        </button>
+    </div>
 </div>
+
 </body>
 </html>

@@ -49,14 +49,6 @@ public class User extends BaseEntity{
     @Column(name = "userGroup")
     private Integer userGroup;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "users_to_subjects",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "subject_id"))
-    @Column(name = "subjects")
-    private List<Subject> subjects;
-
     public User(String username, String firstName, String lastName, String middleName, String email, String password, List<Role> roles, Faculty facultyName, Integer userCourse, Integer userGroup, List<Subject> subjects) {
         this.username = username;
         this.firstName = firstName;
@@ -68,7 +60,6 @@ public class User extends BaseEntity{
         this.facultyName = facultyName;
         this.userCourse = userCourse;
         this.userGroup = userGroup;
-        this.subjects = subjects;
     }
     public User(String username, String firstName, String lastName, String middleName, String email, String password, Faculty facultyName, Integer userCourse, Integer userGroup) {
         this.username = username;
@@ -88,7 +79,6 @@ public class User extends BaseEntity{
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
-        this.subjects = subjects;
     }
 
     public User(String username, String firstName, String lastName, String middleName, String password) {

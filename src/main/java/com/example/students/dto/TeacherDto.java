@@ -13,7 +13,6 @@ public class TeacherDto {
     private String firstName;
     private String lastName;
     private String middleName;
-    private SubjectDto subjects;
 
     public static TeacherDto fromUser(User user) {
         TeacherDto teacherDto = new TeacherDto();
@@ -21,7 +20,6 @@ public class TeacherDto {
         teacherDto.setFirstName(user.getFirstName());
         teacherDto.setLastName(user.getLastName());
         teacherDto.setMiddleName(user.getMiddleName());
-        teacherDto.setSubjects(SubjectDto.fromUser(user));
         return teacherDto;
     }
 }

@@ -4,13 +4,12 @@ import com.example.students.Validator.StudentValidator;
 import com.example.students.Validator.TeacherValidator;
 import com.example.students.dto.AuthenticationRequestDto;
 import com.example.students.exceptions.UserValidationException;
-import com.example.students.model.Faculty;
+import com.example.students.model.*;
 import com.example.students.forms.RegistrationStudentModel;
 import com.example.students.forms.RegistrationTeacherModel;
-import com.example.students.model.Role;
-import com.example.students.model.User;
 import com.example.students.security.jwt.JwtTokenProvider;
 import com.example.students.services.FacultyService;
+import com.example.students.services.SubjectService;
 import com.example.students.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +29,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for authentication requests (login, logout, register, etc.)
@@ -47,15 +47,17 @@ public class AuthenticationRestControllerV1 {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
     private final FacultyService facultyService;
+    private final SubjectService subjectService;
     private final StudentValidator studentValidator;
     private final TeacherValidator teacherValidator;
 
     @Autowired
-    public AuthenticationRestControllerV1(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, FacultyService facultyService, StudentValidator studentValidator, TeacherValidator teacherValidator) {
+    public AuthenticationRestControllerV1(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, FacultyService facultyService, SubjectService subjectService, StudentValidator studentValidator, TeacherValidator teacherValidator) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;
         this.facultyService = facultyService;
+        this.subjectService = subjectService;
         this.studentValidator = studentValidator;
         this.teacherValidator = teacherValidator;
     }
@@ -111,8 +113,16 @@ public class AuthenticationRestControllerV1 {
     }
 
     @GetMapping(value = {"/faculties"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Faculty>> personList() {
+    public ResponseEntity<List<Faculty>> facultyList() {
         return new ResponseEntity<>(facultyService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = {"/subjects"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Subject>> subjectList() {
+        return new ResponseEntity<>(subjectService.findAll()
+                                                    .stream()
+                                                    .filter(i -> i.getStatus() != Status.DELETED)
+                                                    .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping(value = {"/userinfo"}, produces = MediaType.APPLICATION_JSON_VALUE)

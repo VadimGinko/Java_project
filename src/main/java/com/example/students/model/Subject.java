@@ -21,10 +21,6 @@ public class Subject extends BaseEntity{
 
     private String subject;
 
-    @ManyToMany(mappedBy = "subjects")
-    @Column(name = "users")
-    private List<User> users;
-
     public String getSubject() {
         return subject;
     }

@@ -21,8 +21,6 @@ public class SubjectDto {
 
     public static SubjectDto fromUser(User user) {
         SubjectDto subjectDto = new SubjectDto();
-        List<Subject> subjects = new ArrayList<>(user.getSubjects());
-        subjectDto.setSubject(subjects);
         return subjectDto;
     }
 

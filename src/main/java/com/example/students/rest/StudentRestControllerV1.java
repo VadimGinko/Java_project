@@ -38,15 +38,4 @@ public class StudentRestControllerV1 {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PostMapping("addSubject")
-    public ResponseEntity addSubject(RequestEntity<Subject> subject) {
-        subjectService.addSubject(Objects.requireNonNull(subject.getBody()).getSubject());
-        return new ResponseEntity<>(Objects.requireNonNull(subject.getBody()).getSubject(), HttpStatus.CREATED);
-    }
-
-    @PutMapping("deActivateSubject")
-    public ResponseEntity deActivateSubject(RequestEntity<Subject> subject) {
-        subjectService.deleteSubjectByName(Objects.requireNonNull(subject.getBody()).getSubject());
-        return new ResponseEntity<>(Objects.requireNonNull(subject.getBody()).getSubject(), HttpStatus.CREATED);
-    }
 }

@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface IFacultyRepository  extends JpaRepository<Faculty, Integer>  {
+    Faculty findByFaculty(String faculty);
 }

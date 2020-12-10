@@ -1,5 +1,6 @@
 package com.example.students.services;
 
+import com.example.students.dto.TeacherDto;
 import com.example.students.model.Role;
 import com.example.students.model.Status;
 import com.example.students.model.User;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -68,5 +70,12 @@ public class    UserService implements IUserService {
     @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<User> getTeachers() {
+        return userRepository.findAll().stream()
+                                               .filter(x -> x.getRoles().get(0).getName().equals("ROLE_TEACHER"))
+                                               .collect(Collectors.toList());
     }
 }

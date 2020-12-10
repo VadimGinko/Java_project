@@ -41,26 +41,27 @@ load = async () => {
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.facultyName.faculty + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.userCourse + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.userGroup + "</li>";
+        let ulk2 = document.getElementById("buttt");
+        ulk2.innerHTML += "<button type=\"button\" id=\"but\" class=\"btn btn-secondary btn-lg btn-block\" onclick='onTeacherPage()' style=\"margin-left: 35px; margin-bottom: 20px; height: 50px; width:280px\"></button>";
         document.getElementById("but").innerHTML = "view ratings";
-    }else if(length == 5){
+    }else if(length == 4){
         console.log("qq222");
         ulk.innerHTML += "<li>First Name</li>"
         ulk.innerHTML += "<li>Surname</li>"
         ulk.innerHTML += "<li>Middle Name</li>"
-        ulk.innerHTML += "<li>Subjects</li>"
+
 
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.firstName + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.lastName + "</li>";
         ulv.innerHTML += "<li class=\"inf_li\">" + user_info_json.middleName + "</li>";
-        var subjects = "";
-        user_info_json.subjects.subject.forEach(elem =>{
-            subjects += elem + ' '
-        })
-        ulv.innerHTML += "<li class=\"inf_li\">" + subjects + "</li>";
+        let ulk2 = document.getElementById("buttt");
+        ulk2.innerHTML += "<button type=\"button\" id=\"but\" class=\"btn btn-secondary btn-lg btn-block\" onclick='onTeacherPage()' style=\"margin-left: 35px; margin-bottom: 20px; height: 50px; width:280px\"></button>";
         document.getElementById("but").innerHTML = "rate students";
         document.getElementById("spisok").style.marginTop = "30px";
     }else
     {
+        let ulk2 = document.getElementById("buttt");
+        ulk2.innerHTML += "<button type=\"button\" id=\"but\" class=\"btn btn-secondary btn-lg btn-block\" onclick='onAdminPage()' style=\"margin-left: 35px; margin-bottom: 20px; height: 50px; width:280px\"></button>";
         document.getElementById("user_info").style.marginTop = "90px";
         document.getElementById("spisok").style.marginTop = "50px";
         document.getElementById("but").innerHTML = "admin panel";
@@ -68,6 +69,17 @@ load = async () => {
 
 }
 
+onAdminPage = () => {
+    document.location.href = "/register";
+}
+
+onStudentPage = () => {
+    document.location.href = "/login";
+}
+
+onTeacherPage = () => {
+    document.location.href = "/login";
+}
 
 logout = () => {
     localStorage.clear();

@@ -4,9 +4,8 @@ import javax.persistence.*;
 
 
 @Entity
-public class TeacherToGroup {
-    public TeacherToGroup(Integer teacherToGroupId, Faculty faculty, Integer course, Integer tgroup, User user, Subject subject) {
-        this.teacherToGroupId = teacherToGroupId;
+public class TeacherToGroup extends BaseEntity{
+    public TeacherToGroup(Faculty faculty, Integer course, Integer tgroup, User user, Subject subject) {
         this.faculty = faculty;
         this.course = course;
         this.tgroup = tgroup;
@@ -17,9 +16,6 @@ public class TeacherToGroup {
     public TeacherToGroup() {
     }
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer teacherToGroupId;
     @ManyToOne
     private Faculty faculty;
     @Column(name = "Course")
@@ -30,14 +26,6 @@ public class TeacherToGroup {
     private User user;
     @ManyToOne
     private Subject subject;
-
-    public Integer getTeacherToGroupId() {
-        return teacherToGroupId;
-    }
-
-    public void setTeacherToGroupId(Integer teacherToGroupId) {
-        this.teacherToGroupId = teacherToGroupId;
-    }
 
     public Faculty getFaculty() {
         return faculty;
