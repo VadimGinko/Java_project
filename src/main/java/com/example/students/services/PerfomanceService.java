@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PerfomanceService implements IPerfomanceService {
     private final IPerfomanceRepository perfomanceRepository;
@@ -61,5 +63,13 @@ public class PerfomanceService implements IPerfomanceService {
         message.setText(String.format("Предмет: %s; Оценка: %d; %s",rateDto.getSubject(), rateDto.getMark(), rateDto.getDescription()));
 
         this.emailSender.send(message);
+    }
+
+    @Override
+    public List<String> findByUser(String user) {
+        User user1 = iUserRepository.findByUsername(user);
+        var list = perfomanceRepository.findByUser(user1);
+        List<String> listSubjectNames = list.stream().map(i -> i.getSubject().getSubject()).distinct().collect(Collectors.toList());
+        return listSubjectNames;
     }
 }
