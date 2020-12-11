@@ -40,7 +40,7 @@ getMarks = async () => {
     if (jwt == null) {
         document.location.href = "/login";
     }
-    let username = document.getElementById("username").textContent;
+    let username = document.getElementById("username").value;
     let sel2 = document.getElementById("subjects");
     let subject = sel2.options[sel2.selectedIndex].textContent;
     let user_info = await fetch(`/api/v1/students/getUserMarks?username=${username}&subject=${subject}&page=${page}`,
@@ -68,7 +68,7 @@ prev = async () =>{
     if (jwt == null) {
         document.location.href = "/login";
     }
-    let username = document.getElementById("username").textContent;
+    let username = document.getElementById("username").value;
     let sel2 = document.getElementById("subjects");
     let subject = sel2.options[sel2.selectedIndex].textContent;
     page--;
@@ -94,7 +94,7 @@ next = async () =>{
     if (jwt == null) {
         document.location.href = "/login";
     }
-    let username = document.getElementById("username").textContent;
+    let username = document.getElementById("username").value;
     let sel2 = document.getElementById("subjects");
     let subject = sel2.options[sel2.selectedIndex].textContent;
     page++;
@@ -136,3 +136,7 @@ logout = () => {
     localStorage.clear();
     document.location.href = "/login";
 }
+
+
+
+

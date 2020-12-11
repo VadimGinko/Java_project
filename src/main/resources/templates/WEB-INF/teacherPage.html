@@ -46,6 +46,30 @@
         </button>
     </div>
     <h2 id="subj" style="text-align: center"></h2>
+
+
+    <div style="width: 20%;margin:0 auto;">
+        <select id="students2" style="margin: 20px 1px 10px;background-color: rgba(255,255,255,.2); color: white;" class="form-control">
+        </select>
+        <button content="Register"  onclick="getMarks()" type="submit">
+            Show
+        </button>
+    </div>
+    <div id="content" style="width: 50%;margin: 40px auto 10px;">
+    </div>
+    <div style="width: 20%;margin:0 auto;">
+        <nav aria-label="..." >
+            <ul class="pagination" style="display: flex;justify-content: center">
+                <li class="page-item" id="previous" style="width: 100px">
+                    <a class="page-link" href="#" tabindex="-1" style="display: block;text-align: center" onclick="prev()">Previous</a>
+                </li>
+
+                <li class="page-item" id="next" style="margin-left: 30px; width: 100px">
+                    <a class="page-link" href="#" style="display: block;text-align: center" onclick="next()">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </main>
 </body>
 </html>

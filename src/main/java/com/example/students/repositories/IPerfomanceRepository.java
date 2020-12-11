@@ -13,4 +13,5 @@ public interface IPerfomanceRepository  extends JpaRepository<AcademicPerformanc
     <S extends AcademicPerformance> S save(S s);
     List<AcademicPerformance> findByUser(User user);
     Page<AcademicPerformance> findByUserAndSubject(User user, Subject subject, Pageable pageable);
+    Page<AcademicPerformance> findByUser(User user, Pageable pageable);
 }

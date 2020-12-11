@@ -26,7 +26,25 @@ async function setStudents() {
         i++;
     });
 }
+async function setStudents2() {
+    let jwt = localStorage.getItem("jwt");
 
+
+    let response = await fetch(`/api/v1/teachers/getStudentsAll`,
+        {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Bearer_' + jwt}
+        });
+    let data = await response.json();
+    var select2 = document.getElementById("students2");
+    select2.innerHTML = "";
+    var i = 1;
+    data.forEach(el => {
+        select2.innerHTML += "<option value=\"" + el.username + "\">" + el.lastName+ " " + el.firstName +  "</option>";
+        i++;
+    });
+}
+setStudents2()
 async function setSubjects() {
     let response = await fetch("api/v1/auth/subjects",
         {
@@ -116,4 +134,107 @@ async function rate(){
 logout = () => {
     localStorage.clear();
     document.location.href = "/login";
+}
+
+
+
+
+
+
+
+let page = 0;
+getMarks = async () => {
+    let jwt = localStorage.getItem("jwt");
+    if (jwt == null) {
+        document.location.href = "/login";
+    }
+    let sel3 = document.getElementById("students2");
+    let username = sel3.options[sel3.selectedIndex].value;
+    let user_info = await fetch(`/api/v1/teachers/getStudentMarksAll?username=${username}&page=${page}`,
+        {
+            method: 'GET',
+            headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
+        });
+    page = 0;
+    let user_info_json = await user_info.json();
+    console.log(user_info_json)
+    let content = document.getElementById("content");
+    content.innerHTML = "";
+    user_info_json.content.forEach(el => {
+        content.innerHTML += "        <div style=\"display: flex;justify-content: center\">\n" +
+            "            <h5>Оценка: "+ el.mark +"</h5>\n" +
+            "            <h5 style=\"margin-left: 40px\">Описание: "+ el.discription +"</h5>\n" +
+            "            <h5 style=\"margin-left: 40px\">Предмет: "+ el.subject.subject +"</h5>\n" +
+            "        </div>"
+    });
+
+    checkDisabled(user_info_json);
+};
+
+prev = async () =>{
+    let jwt = localStorage.getItem("jwt");
+    if (jwt == null) {
+        document.location.href = "/login";
+    }
+    let sel3 = document.getElementById("students2");
+    let username = sel3.options[sel3.selectedIndex].value;
+    page--;
+    let user_info = await fetch(`/api/v1/teachers/getStudentMarksAll?username=${username}&page=${page}`,
+        {
+            method: 'GET',
+            headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
+        });
+    let user_info_json = await user_info.json();
+    let content = document.getElementById("content");
+    content.innerHTML = "";
+    user_info_json.content.forEach(el => {
+        content.innerHTML += "        <div style=\"display: flex;justify-content: center\">\n" +
+            "            <h5>Оценка: "+ el.mark +"</h5>\n" +
+            "            <h5 style=\"margin-left: 40px\">Описание: "+ el.discription +"</h5>\n" +
+            "            <h5 style=\"margin-left: 40px\">Предмет: "+ el.subject.subject +"</h5>\n" +
+            "        </div>"
+    });
+    checkDisabled(user_info_json);
+};
+
+next = async () =>{
+    let jwt = localStorage.getItem("jwt");
+    if (jwt == null) {
+        document.location.href = "/login";
+    }
+    let sel3 = document.getElementById("students2");
+    let username = sel3.options[sel3.selectedIndex].value;
+    page++;
+    let user_info = await fetch(`/api/v1/teachers/getStudentMarksAll?username=${username}&page=${page}`,
+        {
+            method: 'GET',
+            headers: {'Authorization': 'Bearer_' + jwt, 'Accept': 'application/json'}
+        });
+    let user_info_json = await user_info.json();
+    let content = document.getElementById("content");
+    content.innerHTML = "";
+    user_info_json.content.forEach(el => {
+        content.innerHTML += "        <div style=\"display: flex;justify-content: center\">\n" +
+            "            <h5>Оценка: "+ el.mark +"</h5>\n" +
+            "            <h5 style=\"margin-left: 40px\">Описание: "+ el.discription +"</h5>\n" +
+            "            <h5 style=\"margin-left: 40px\">Предмет: "+ el.subject.subject +"</h5>\n" +
+            "        </div>"
+    });
+    checkDisabled(user_info_json);
+};
+
+checkDisabled = (user_info_json) =>  {
+    document.getElementById("previous").classList.add("disabled");
+    document.getElementById("next").classList.add("disabled");
+    if(page == 0) {
+        document.getElementById("previous").classList.add("disabled");
+    }else {
+        document.getElementById("previous").classList.remove("disabled");
+    }
+
+    if(page == user_info_json.totalPages -1 ){
+        document.getElementById("next").classList.add("disabled");
+    }else{
+        document.getElementById("next").classList.remove("disabled");
+    }
 }
