@@ -1,5 +1,7 @@
 package com.example.students.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
